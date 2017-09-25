@@ -10,13 +10,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AndroidImageSlider extends AppCompatActivity {
 
     private Spinner spinner1;
     private ViewPager mViewPager;
-    List<String> list = new ArrayList<>();
+    List<String> districtNames = new ArrayList<>();
     ArrayAdapter<String> dataAdapter;
     int lastSuccessSelectPosition = -1;
     List<String> successIds = new ArrayList<>();
@@ -38,37 +39,12 @@ public class AndroidImageSlider extends AppCompatActivity {
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
 
-        list.add("Ampara");
-        list.add("Anuradhapura");
-        list.add("Badulla");
-        list.add("Batticaloa");
-        list.add("Colombo");
-        list.add("Galle");
-        list.add("Gampaha");
-        list.add("Hambantota");
-        list.add("Jaffna");
-        list.add("Kalutara");
-        list.add("Kandy");
-        list.add("Kegalle");
-        list.add("Kilinochchi");
-        list.add("Kurunegala");
-        list.add("Mannar");
-        list.add("Matale");
-        list.add("Matara");
-        list.add("Monaragala");
-        list.add("Mullaitivu");
-        list.add("Nuwara Eliya");
-        list.add("Polonnaruwa");
-        list.add("Puttalam");
-        list.add("Ratnapura");
-        list.add("Trincomalee");
-        list.add("Vavuniya");
-
-
-        list.add(0,"Select District Name");
+        districtNames.addAll(Districts.getDistrictNames());
+        Collections.sort(districtNames);
+        districtNames.add(0,"Select District Name");
 
         dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, list);
+                android.R.layout.simple_spinner_item, districtNames);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(dataAdapter);
     }
@@ -111,7 +87,7 @@ public class AndroidImageSlider extends AppCompatActivity {
         @Override
         public void onPageSelected(int position) {
             if(lastSuccessSelectPosition != -1) {
-                list.remove(lastSuccessSelectPosition);
+                districtNames.remove(lastSuccessSelectPosition);
 
                 lastSuccessSelectPosition = -1;
                 dataAdapter.notifyDataSetChanged();

@@ -1,21 +1,16 @@
 package com.lanka_guide.districtssimple;
 
-import android.util.SparseArray;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by chanya on 2017/09/24.
+ * District class
  */
 
-public class Districts {
+class Districts {
 
-    static List<District> districts = new ArrayList<>();
+    private static List<District> districts = new ArrayList<>();
 
     static {
         districts.add(new District(R.drawable.ampara_district, "Ampara"));
@@ -45,7 +40,7 @@ public class Districts {
         districts.add(new District(R.drawable.vavuniya_district, "Vavuniya"));
     }
 
-    public static int[] getSliderImagesId() {
+    static int[] getSliderImagesId() {
         Collections.shuffle(districts);
         int[] imageIds = new int[districts.size()];
         for (int i = 0; i < districts.size(); i++) {
@@ -54,24 +49,32 @@ public class Districts {
         return imageIds;
     }
 
-    public static String getName(int position) {
+    static List<String> getDistrictNames() {
+        List<String> names = new ArrayList<>();
+        for (District d : districts) {
+            names.add(d.getName());
+        }
+        return names;
+    }
+
+    static String getName(int position) {
         return districts.get(position).getName();
     }
 
-    static class District {
+    private static class District {
         int imageId;
         private String name;
 
-        public District(int imageId, String name) {
+        District(int imageId, String name) {
             this.name = name;
             this.imageId = imageId;
         }
 
-        public String getName() {
+        String getName() {
             return name;
         }
 
-        public int getImageId() {
+        int getImageId() {
             return imageId;
         }
 
