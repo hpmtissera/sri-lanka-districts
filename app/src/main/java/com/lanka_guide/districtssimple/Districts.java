@@ -11,6 +11,7 @@ import java.util.List;
 class Districts {
 
     private static List<District> districts = new ArrayList<>();
+    private static List<String> districtNames = new ArrayList<>();
 
     static {
         districts.add(new District(R.drawable.ampara_district, "Ampara"));
@@ -22,7 +23,7 @@ class Districts {
         districts.add(new District(R.drawable.gampaha_district, "Gampaha"));
         districts.add(new District(R.drawable.hambantota_district, "Hambantota"));
         districts.add(new District(R.drawable.jaffna_district, "Jaffna"));
-        districts.add(new District(R.drawable.jaffna_district, "Kalutara"));
+        districts.add(new District(R.drawable.kalutara_district, "Kalutara"));
         districts.add(new District(R.drawable.kandy_district, "Kandy"));
         districts.add(new District(R.drawable.kegalle_district, "Kegalle"));
         districts.add(new District(R.drawable.kilinochchi_district, "Kilinochchi"));
@@ -38,10 +39,16 @@ class Districts {
         districts.add(new District(R.drawable.ratnapura_district, "Ratnapura"));
         districts.add(new District(R.drawable.trincomalee_district, "Trincomalee"));
         districts.add(new District(R.drawable.vavuniya_district, "Vavuniya"));
+
+        districtNames = new ArrayList<>();
+        for (District d : districts) {
+            districtNames.add(d.getName());
+        }
     }
 
-    static int[] getSliderImagesId() {
+    static int[] getDistrictImagesId() {
         Collections.shuffle(districts);
+        districts = Collections.unmodifiableList(districts);
         int[] imageIds = new int[districts.size()];
         for (int i = 0; i < districts.size(); i++) {
             imageIds[i] = districts.get(i).getImageId();
@@ -49,21 +56,32 @@ class Districts {
         return imageIds;
     }
 
-    static List<String> getDistrictNames() {
-        List<String> names = new ArrayList<>();
-        for (District d : districts) {
-            names.add(d.getName());
-        }
-        return names;
-    }
-
     static String getName(int position) {
         return districts.get(position).getName();
+    }
+
+    static List<String> getAnswers(String districtName) {
+        List<String> allNames = new ArrayList<>();
+        allNames.addAll(districtNames);
+        Collections.shuffle(allNames);
+
+        List<String> answers = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            answers.add(allNames.get(i));
+        }
+
+        if (!answers.contains(districtName)) {
+            answers.remove(0);
+            answers.add(districtName);
+            Collections.shuffle(answers);
+        }
+        return answers;
     }
 
     private static class District {
         int imageId;
         private String name;
+        private List<String> answerPool;
 
         District(int imageId, String name) {
             this.name = name;
@@ -78,5 +96,8 @@ class Districts {
             return imageId;
         }
 
+        public List<String> getAnswerPool() {
+            return answerPool;
+        }
     }
 }
