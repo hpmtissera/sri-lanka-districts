@@ -1,4 +1,4 @@
-package com.lanka_guide.districtssimple;
+package com.lanka_guide.districts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import java.util.List;
  * District class
  */
 
-class Districts {
+public class Districts {
 
     private static List<District> districts = new ArrayList<>();
     private static List<String> districtNames = new ArrayList<>();
@@ -46,7 +46,7 @@ class Districts {
         }
     }
 
-    static int[] getDistrictImagesId() {
+    public static int[] getDistrictImagesId() {
         Collections.shuffle(districts);
         districts = Collections.unmodifiableList(districts);
         int[] imageIds = new int[districts.size()];
@@ -56,11 +56,11 @@ class Districts {
         return imageIds;
     }
 
-    static String getName(int position) {
+    public static String getName(int position) {
         return districts.get(position).getName();
     }
 
-    static List<String> getAnswers(String districtName) {
+    public static List<String> getAnswers(String districtName) {
         List<String> allNames = new ArrayList<>();
         allNames.addAll(districtNames);
         Collections.shuffle(allNames);

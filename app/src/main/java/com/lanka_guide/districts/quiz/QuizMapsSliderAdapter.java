@@ -1,4 +1,4 @@
-package com.lanka_guide.districtssimple;
+package com.lanka_guide.districts.quiz;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-class DistrictSliderAdapter extends PagerAdapter {
+import com.lanka_guide.districts.Districts;
+
+class QuizMapsSliderAdapter extends PagerAdapter {
     private Context mContext;
     private int[] districtImageIds = Districts.getDistrictImagesId();
 
-    DistrictSliderAdapter(Context context) {
+    QuizMapsSliderAdapter(Context context) {
         this.mContext = context;
     }
 

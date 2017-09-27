@@ -1,4 +1,4 @@
-package com.lanka_guide.districtssimple;
+package com.lanka_guide.districts.quiz;
 
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.lanka_guide.districts.Districts;
+import com.lanka_guide.districts.R;
+
 import java.util.List;
 
-public class DistrictSlider extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
 
     private Button option1;
     private Button option2;
@@ -23,10 +26,10 @@ public class DistrictSlider extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.android_image_slider_activity);
+        setContentView(R.layout.quiz_activity);
 
         mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);
-        DistrictSliderAdapter adapterView = new DistrictSliderAdapter(this);
+        QuizMapsSliderAdapter adapterView = new QuizMapsSliderAdapter(this);
         mViewPager.setAdapter(adapterView);
         mViewPager.addOnPageChangeListener(new CustomOnPageChangeListener());
 

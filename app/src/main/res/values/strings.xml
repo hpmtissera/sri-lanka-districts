@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DistrictsSimple</string>
+    <string name="app_name">Sri Lanka Districts</string>
 
     <string name="country_prompt">Select the District Name</string>
 
@@ -32,4 +32,6 @@
         <item>Vavuniya</item>
     </string-array>
 
+    <string name="quiz">Quiz</string>
+    <string name="play">Play</string>
 </resources>
