@@ -20,6 +20,9 @@
 
         <activity android:name="com.lanka_guide.districts.quiz.QuizActivity">
         </activity>
+
+        <activity android:name="com.lanka_guide.districts.play.PlayActivity">
+        </activity>
     </application>
 
 </manifest>

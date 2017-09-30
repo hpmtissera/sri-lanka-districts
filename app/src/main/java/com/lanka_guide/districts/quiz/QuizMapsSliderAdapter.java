@@ -8,11 +8,11 @@ import android.widget.ImageView;
 
 import com.lanka_guide.districts.Districts;
 
-class QuizMapsSliderAdapter extends PagerAdapter {
+public class QuizMapsSliderAdapter extends PagerAdapter {
     private Context mContext;
     private int[] districtImageIds = Districts.getDistrictImagesId();
 
-    QuizMapsSliderAdapter(Context context) {
+    public QuizMapsSliderAdapter(Context context) {
         this.mContext = context;
     }
 

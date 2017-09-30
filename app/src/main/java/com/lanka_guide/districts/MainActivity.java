@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.lanka_guide.districts.play.PlayActivity;
 import com.lanka_guide.districts.quiz.QuizActivity;
 
 /**
@@ -24,5 +25,7 @@ public class MainActivity extends Activity {
     }
 
     public void onClickPlay(View view) {
+        Intent intent = new Intent(this, PlayActivity.class);
+        startActivity(intent);
     }
 }
