@@ -15,7 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.lanka_guide.districts.Districts;
 import com.lanka_guide.districts.R;
 
 import java.util.ArrayList;
@@ -26,10 +28,10 @@ import java.util.List;
  */
 
 public class PlayActivity extends Activity {
-    ImageView img1;
-    ImageView img2;
-    RelativeLayout linearLayout;
+    ImageView fullMap;
+    RelativeLayout fullMapLayout;
     LinearLayout availableDistricts;
+    List<Districts.District> placedDistricts = new ArrayList<>();
     private ViewPager mViewPager;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
 
@@ -38,49 +40,48 @@ public class PlayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_activity);
 
-        img1 = (ImageView) findViewById(R.id.imageView1);
-        img2 = (ImageView) findViewById(R.id.imageView2);
+        fullMap = (ImageView) findViewById(R.id.fullMap);
 
-        linearLayout = (RelativeLayout) findViewById(R.id.map_layout);
+        fullMapLayout = (RelativeLayout) findViewById(R.id.map_layout);
         availableDistricts = (LinearLayout) findViewById(R.id.availableDistricts);
 
         List<Integer> districtCropImages = new ArrayList<>();
-        districtCropImages.add(R.drawable.moneragala_district_crop);
-        districtCropImages.add(R.drawable.batticalo_district_crop);
-        districtCropImages.add(R.drawable.colombo_district_crop);
-        districtCropImages.add(R.drawable.gampaha_district_crop);
+        List<Districts.District> districts = Districts.getDistricts();
 
-        for (final int i : districtCropImages) {
-            final ImageView img3 = new ImageView(this);
-            img3.setImageResource(i);
+        for (Districts.District district : districts) {
+            if (district.getDistrictMapId() != 0) {
+                districtCropImages.add(district.getDistrictMapId());
+            }
+        }
 
-            img3.setOnLongClickListener(
+        for (final int mapId : districtCropImages) {
+            final ImageView districtImage = new ImageView(this);
+            districtImage.setImageResource(mapId);
+
+            districtImage.setOnLongClickListener(
 
                     new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-                            ClipData.Item item = new ClipData.Item((CharSequence) Integer.toString(i));
+                            Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId),
+                                    Toast.LENGTH_SHORT).show();
+                            ClipData.Item item = new ClipData.Item(Integer.toString(mapId));
 
-
-                            ClipData dragData = new ClipData(Integer.toString(i),
+                            ClipData dragData = new ClipData(Integer.toString(mapId),
                                     new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
 
                             Bitmap fullMap = BitmapFactory.decodeResource(getResources(), R.drawable.colombo_district);
-                            Bitmap bMap = BitmapFactory.decodeResource(getResources(), i);
+                            Bitmap bMap = BitmapFactory.decodeResource(getResources(), mapId);
 
-                            int scaledWidth = (int) (((double) bMap.getWidth() / fullMap.getWidth()) * img1.getWidth());
-                            int scaledHeight = (int) (((double) bMap.getHeight() / fullMap.getHeight()) * img1.getHeight());
-
-
-                            Log.d(PlayActivity.class.getName(), "scaled height : " + scaledHeight);
-                            Log.d(PlayActivity.class.getName(), "scales width : " + scaledWidth);
+                            int scaledWidth = (int) (((double) bMap.getWidth() / fullMap.getWidth()) * PlayActivity.this.fullMap.getWidth());
+                            int scaledHeight = (int) (((double) bMap.getHeight() / fullMap.getHeight()) * PlayActivity.this.fullMap.getHeight());
 
                             Bitmap bMapScaled = Bitmap.createScaledBitmap(bMap, scaledWidth, scaledHeight, true);
 
-                            View.DragShadowBuilder myShadow = new MyDragShadowBuilder(img3, scaledWidth, scaledHeight);
+                            View.DragShadowBuilder myShadow = new MyDragShadowBuilder(districtImage, scaledWidth, scaledHeight);
                             v.startDrag(dragData, myShadow, v, 0);
 
-                            img3.setImageBitmap(bMapScaled);
+                            districtImage.setImageBitmap(bMapScaled);
 
                             return false;
                         }
@@ -88,43 +89,20 @@ public class PlayActivity extends Activity {
 
             );
 
-            img3.setAdjustViewBounds(true);
-            availableDistricts.addView(img3);
+            districtImage.setAdjustViewBounds(true);
+            availableDistricts.addView(districtImage);
 
 
         }
 
-        img2.setOnLongClickListener(
 
-                new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        ClipData.Item item = new ClipData.Item((CharSequence) v.getTag());
-
-
-                        ClipData dragData = new ClipData((CharSequence) v.getTag(),
-                                new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
-
-                        View.DragShadowBuilder myShadow = new View.DragShadowBuilder(img2);
-
-                        v.startDrag(dragData, myShadow, v, 0);
-
-                        return false;
-                    }
-                }
-
-        );
-
-        img2.setOnDragListener(new View.OnDragListener() {
+        fullMap.setOnDragListener(new View.OnDragListener() {
 
             @Override
             public boolean onDrag(View view, DragEvent event) {
 
                 final int action = event.getAction();
 
-                View view1 = (View) event.getLocalState();
-
-                // Handles each of the expected events
                 switch (action) {
 
                     case DragEvent.ACTION_DRAG_STARTED:
@@ -132,71 +110,10 @@ public class PlayActivity extends Activity {
 
                     case DragEvent.ACTION_DRAG_ENDED:
                         break;
+
                     case DragEvent.ACTION_DROP:
+                        return onDropDistrict(event);
 
-                        break;
-                    default:
-                        break;
-                }
-
-                return true;
-            }
-        });
-
-        img1.setOnDragListener(new View.OnDragListener() {
-
-            @Override
-            public boolean onDrag(View view, DragEvent event) {
-
-                final int action = event.getAction();
-
-                // Handles each of the expected events
-                switch (action) {
-
-                    case DragEvent.ACTION_DRAG_STARTED:
-                        return true;
-
-                    case DragEvent.ACTION_DRAG_ENDED:
-
-                        break;
-                    case DragEvent.ACTION_DROP:
-
-                        ImageView dragged = (ImageView) event.getLocalState();
-
-                        int x_cord = (int) event.getX();
-                        int y_cord = (int) event.getY();
-                        if (event.getClipData().getItemAt(0).getText().equals(Integer.toString(R.drawable
-                                .galle_district_crop)) && x_cord > 350 && x_cord < 450 && y_cord > 1000 &&
-                                y_cord < 1050) {
-
-
-                            dragged.setX(x_cord - (dragged.getWidth() / 2));
-                            dragged.setY(y_cord - (dragged.getHeight() / 2));
-
-                            availableDistricts.removeView(dragged);
-                            linearLayout.addView(dragged);
-
-                        }
-
-                        if (event.getClipData().getItemAt(0).getText().equals(Integer.toString(R.drawable
-                                .moneragala_district_crop)) && x_cord > 600 && x_cord < 700 && y_cord > 800 && y_cord
-                                < 900) {
-                            if (dragged.getX() == 686 || dragged.getY() == 700) {
-                                return false;
-                            }
-                            availableDistricts.removeView(dragged);
-                            linearLayout.addView(dragged);
-
-
-                            dragged.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-                            Log.d(PlayActivity.class.getName(), "get X : " + dragged.getX());
-                            Log.d(PlayActivity.class.getName(), "get Y : " + dragged.getY());
-
-                            dragged.setX(685);
-                            dragged.setY(700);
-                        }
-                        break;
                     default:
                         break;
                 }
@@ -206,42 +123,67 @@ public class PlayActivity extends Activity {
         });
     }
 
+    private boolean onDropDistrict(DragEvent event) {
+        Districts.District district = Districts.getDistrictByDistrictMapId(Integer.parseInt((String) event
+                .getClipData().getItemAt(0).getText()));
+
+        ImageView dragged = (ImageView) event.getLocalState();
+
+        int x_cord = (int) event.getX();
+        int y_cord = (int) event.getY();
+
+        if (!district.isInsideRage(new Districts.Point(x_cord, y_cord))) {
+
+            dragged.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+            if (!placedDistricts.contains(district)) {
+
+                availableDistricts.removeView(dragged);
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dragged.getLayoutParams());
+                params.leftMargin = district.getLocation().getX();
+                params.topMargin = district.getLocation().getY();
+
+                fullMapLayout.addView(dragged, params);
+                placedDistricts.add(district);
+            } else {
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dragged.getLayoutParams());
+
+                params.leftMargin = x_cord - dragged.getWidth() / 2;
+                params.topMargin = y_cord - dragged.getHeight() / 2;
+
+                dragged.setLayoutParams(params);
+
+                Log.d(PlayActivity.class.getName(), district.getName() + " district location X : " + params.leftMargin);
+                Log.d(PlayActivity.class.getName(), district.getName() + " district location Y : " + params.topMargin);
+            }
+
+//            dragged.setLongClickable(false);
+        }
+        return false;
+    }
+
     private static class MyDragShadowBuilder extends View.DragShadowBuilder {
 
         int scaledWidth;
         int scaledHeight;
         private Point mScaleFactor;
 
-        // Defines the constructor for myDragShadowBuilder
-        public MyDragShadowBuilder(View v, int scaledWidth, int scaledHeight) {
-
-            // Stores the View parameter passed to myDragShadowBuilder.
+        MyDragShadowBuilder(View v, int scaledWidth, int scaledHeight) {
             super(v);
-
             this.scaledWidth = scaledWidth;
             this.scaledHeight = scaledHeight;
 
         }
 
-        // Defines a callback that sends the drag shadow dimensions and touch point back to the
-        // system.
         @Override
         public void onProvideShadowMetrics(Point size, Point touch) {
-            // Defines local variables
-            int width;
-            int height;
+            int width = scaledWidth;
+            int height = scaledHeight;
 
-
-            // Sets the width of the shadow to half the width of the original View
-//            width = getView().getWidth() * 2;
-            width = scaledWidth;
-            // Sets the height of the shadow to half the height of the original View
-//            height = getView().getHeight() * 2;
-            height = scaledHeight;
-
-            // Sets the size parameter's width and height values. These get back to the system
-            // through the size parameter.
             size.set(width, height);
+
             // Sets size parameter to member that will be used for scaling shadow image.
             mScaleFactor = size;
 
@@ -251,7 +193,6 @@ public class PlayActivity extends Activity {
 
         @Override
         public void onDrawShadow(Canvas canvas) {
-
             // Draws the ColorDrawable in the Canvas passed in from the system.
             canvas.scale(mScaleFactor.x / (float) getView().getWidth(), mScaleFactor.y / (float) getView().getHeight());
             getView().draw(canvas);
