@@ -130,7 +130,7 @@ public class PlayActivity extends Activity {
         int y_cord = (int) event.getY();
 
         if (district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
-                (double) Math.round((int) (y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0))) {
+                (double) Math.round((y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0))) {
 
             dragged.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
