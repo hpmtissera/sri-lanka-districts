@@ -63,12 +63,10 @@ public class PlayActivity extends Activity {
                     new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-                            Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId),
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId), Toast.LENGTH_SHORT).show();
                             ClipData.Item item = new ClipData.Item(Integer.toString(mapId));
 
-                            ClipData dragData = new ClipData(Integer.toString(mapId),
-                                    new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
+                            ClipData dragData = new ClipData(Integer.toString(mapId), new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
 
                             Bitmap fullMap = BitmapFactory.decodeResource(getResources(), R.drawable.colombo_district);
                             Bitmap bMap = BitmapFactory.decodeResource(getResources(), mapId);
@@ -91,7 +89,6 @@ public class PlayActivity extends Activity {
 
             districtImage.setAdjustViewBounds(true);
             availableDistricts.addView(districtImage);
-
 
         }
 
@@ -132,7 +129,8 @@ public class PlayActivity extends Activity {
         int x_cord = (int) event.getX();
         int y_cord = (int) event.getY();
 
-        if (!district.isInsideRage(new Districts.Point(x_cord, y_cord))) {
+        if (district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
+                (double) Math.round((int) (y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0))) {
 
             dragged.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
@@ -141,8 +139,8 @@ public class PlayActivity extends Activity {
                 availableDistricts.removeView(dragged);
 
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dragged.getLayoutParams());
-                params.leftMargin = district.getLocation().getX();
-                params.topMargin = district.getLocation().getY();
+                params.leftMargin = (int) Math.round(district.getLocation().getX() * fullMap.getWidth());
+                params.topMargin = (int) Math.round(district.getLocation().getY() * fullMap.getHeight());
 
                 fullMapLayout.addView(dragged, params);
                 placedDistricts.add(district);
@@ -155,11 +153,19 @@ public class PlayActivity extends Activity {
 
                 dragged.setLayoutParams(params);
 
-                Log.d(PlayActivity.class.getName(), district.getName() + " district location X : " + params.leftMargin);
-                Log.d(PlayActivity.class.getName(), district.getName() + " district location Y : " + params.topMargin);
+                Log.d(PlayActivity.class.getName(), district.getName() + " district location X : " + Math.round(
+                        params.leftMargin * 10000.0 / fullMap.getWidth()) / 10000.0);
+                Log.d(PlayActivity.class.getName(), district.getName() + " district location Y : " + Math.round(
+                        params.topMargin * 10000.0 / fullMap.getHeight()) / 10000.0);
+                Log.d(PlayActivity.class.getName(), "Fllmap aspect ratio : " + (double) fullMap.getWidth() / fullMap.getHeight());
             }
 
 //            dragged.setLongClickable(false);
+
+//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(fullMap.getLayoutParams());
+//            Log.d(PlayActivity.class.getName(), "width : " + fullMap.getWidth());
+//            Log.d(PlayActivity.class.getName(), "height : " + fullMap.getHeight());
+
         }
         return false;
     }

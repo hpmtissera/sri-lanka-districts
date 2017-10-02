@@ -17,32 +17,31 @@ public class Districts {
     private static Map<Integer, District> mapIdDistrictMap = new HashMap<>();
 
     static {
-        districts.add(new District(R.drawable.ampara_district, "Ampara"));
-        districts.add(new District(R.drawable.anuradhapura_district, "Anuradhapura"));
-        districts.add(new District(R.drawable.badulla_district, "Badulla"));
-        districts.add(new District(R.drawable.batticaloa_district, "Batticaloa"));
-        districts.add(new District(R.drawable.colombo_district, R.drawable.colombo_district_crop, "Colombo", 263, 944));
-        districts.add(new District(R.drawable.galle_district, "Galle"));
-        districts.add(new District(R.drawable.gampaha_district, R.drawable.gampaha_district_crop, "Gampaha", 259, 844));
-        districts.add(new District(R.drawable.hambantota_district, "Hambantota"));
-        districts.add(new District(R.drawable.jaffna_district, "Jaffna"));
-        districts.add(new District(R.drawable.kalutara_district, "Kalutara"));
-        districts.add(new District(R.drawable.kandy_district, "Kandy"));
-        districts.add(new District(R.drawable.kegalle_district, "Kegalle"));
-        districts.add(new District(R.drawable.kilinochchi_district, "Kilinochchi"));
-        districts.add(new District(R.drawable.kurunegala_district, "Kurunegala"));
-        districts.add(new District(R.drawable.mannar_district, "Mannar"));
-        districts.add(new District(R.drawable.matale_district, "Matale"));
-        districts.add(new District(R.drawable.matara_district, "Matara"));
-        districts.add(new District(R.drawable.moneragala_district, R.drawable.moneragala_district_crop, "Monaragala",
-                560, 807));
-        districts.add(new District(R.drawable.mullaitivu_district, "Mullaitivu"));
-        districts.add(new District(R.drawable.nuwara_eliya_district, "Nuwara Eliya"));
-        districts.add(new District(R.drawable.polonnaruwa_district, "Polonnaruwa"));
-        districts.add(new District(R.drawable.puttalam_district, "Puttalam"));
-        districts.add(new District(R.drawable.ratnapura_district, "Ratnapura"));
-        districts.add(new District(R.drawable.trincomalee_district, "Trincomalee"));
-        districts.add(new District(R.drawable.vavuniya_district, "Vavuniya"));
+        districts.add(new District(R.drawable.ampara_district, R.drawable.ampara_district_crop, "Ampara", 0.5625, 0.5222));
+        districts.add(new District(R.drawable.anuradhapura_district, R.drawable.anuradhapura_district_crop, "Anuradhapura", 0.2738, 0.2618));
+        districts.add(new District(R.drawable.badulla_district, R.drawable.badulla_district_crop, "Badulla", 0.5025, 0.5498));
+        districts.add(new District(R.drawable.batticaloa_district, R.drawable.batticalo_district_crop, "Batticaloa", 0.6175, 0.4155));
+        districts.add(new District(R.drawable.colombo_district, R.drawable.colombo_district_crop, "Colombo", 0.2425, 0.6855));
+        districts.add(new District(R.drawable.galle_district, R.drawable.galle_district_crop, "Galle", 0.2831, 0.8106));
+        districts.add(new District(R.drawable.gampaha_district, R.drawable.gampaha_district_crop, "Gampaha", 0.2375, 0.6126));
+        districts.add(new District(R.drawable.hambantota_district, R.drawable.hambantota_district_crop, "Hambantota", 0.4613, 0.7783));
+        districts.add(new District(R.drawable.jaffna_district, R.drawable.jaffna_district_crop, "Jaffna", 0.1869, 0.0628));
+        districts.add(new District(R.drawable.kalutara_district, R.drawable.kalutara_district_crop, "Kalutara", 0.2563, 0.7203));
+        districts.add(new District(R.drawable.kandy_district, R.drawable.kandy_district_crop, "Kandy", 0.4075, 0.5783));
+        districts.add(new District(R.drawable.kegalle_district, R.drawable.kegalle_district_crop, "Kegalle", 0.3288, 0.5961));
+        districts.add(new District(R.drawable.kilinochchi_district, R.drawable.kilinochchi_district_crop, "Kilinochchi", 0.2913, 0.099));
+        districts.add(new District(R.drawable.kurunegala_district, R.drawable.kurunegala_district_crop, "Kurunegala", 0.2569, 0.4242));
+        districts.add(new District(R.drawable.mannar_district, R.drawable.mannar_district_crop, "Mannar", 0.1988, 0.1957));
+        districts.add(new District(R.drawable.matale_district, R.drawable.matale_district_crop, "Matale", 0.4256, 0.4662));
+        districts.add(new District(R.drawable.matara_district, R.drawable.matara_district_crop, "Matara", 0.395, 0.815));
+        districts.add(new District(R.drawable.moneragala_district, R.drawable.moneragala_district_crop, "Monaragala", 0.5185, 0.5848));
+        districts.add(new District(R.drawable.mullaitivu_district, R.drawable.mullaitivu_district_crop, "Mullaitivu", 0.34, 0.144));
+        districts.add(new District(R.drawable.nuwara_eliya_district, R.drawable.nuwara_eliya_district_crop, "Nuwara Eliya", 0.4094, 0.6203));
+        districts.add(new District(R.drawable.polonnaruwa_district, R.drawable.polonnaruwa_district_crop, "Polonnaruwa", 0.4994, 0.3932));
+        districts.add(new District(R.drawable.puttalam_district, R.drawable.puttalam_district_crop, "Puttalam", 0.1981, 0.344));
+        districts.add(new District(R.drawable.ratnapura_district, R.drawable.ratnapura_district_crop, "Ratnapura", 0.3388, 0.699));
+        districts.add(new District(R.drawable.trincomalee_district, R.drawable.trincomalee_district_crop, "Trincomalee", 0.5063, 0.2512));
+        districts.add(new District(R.drawable.vavuniya_district, R.drawable.vavuniya_district_crop, "Vavuniya", 0.3369, 0.2159));
 
         districtNames = new ArrayList<>();
         for (District d : districts) {
@@ -117,7 +116,7 @@ public class Districts {
             this.districtMapId = districtMapId;
         }
 
-        District(int fullMapId, int districtMapId, String name, int x, int y) {
+        District(int fullMapId, int districtMapId, String name, double x, double y) {
             this(fullMapId, districtMapId, name, new Point(x, y));
         }
 
@@ -153,19 +152,19 @@ public class Districts {
     }
 
     public static class Point {
-        int x;
-        int y;
+        double x;
+        double y;
 
-        public Point(int x, int y) {
+        public Point(double x, double y) {
             this.x = x;
             this.y = y;
         }
 
-        public int getX() {
+        public double getX() {
             return x;
         }
 
-        public int getY() {
+        public double getY() {
             return y;
         }
     }
@@ -173,13 +172,13 @@ public class Districts {
     public static class Range {
         Point min;
         Point max;
-        double percentage = 0.1;
+        double percentage = 0.15;
 
         public Range(Point location) {
-            int xMin = (int) (location.getX() * (1 - percentage));
-            int xMax = (int) (location.getX() * (1 + percentage));
-            int yMin = (int) (location.getY() * (1 - percentage));
-            int yMax = (int) (location.getY() * (1 + percentage));
+            double xMin = location.getX() * (1 - percentage);
+            double xMax = location.getX() * (1 + percentage);
+            double yMin = location.getY() * (1 - percentage);
+            double yMax = location.getY() * (1 + percentage);
 
             this.min = new Point(xMin, yMin);
             this.max = new Point(xMax, yMax);
@@ -187,6 +186,14 @@ public class Districts {
         }
 
         public boolean isInsideRage(Point point) {
+//            Log.d(District.class.getName(), "xMin : " + min.getX());
+//            Log.d(District.class.getName(), "xMax : " + max.getX());
+//            Log.d(District.class.getName(), "pointX : " + point.getX());
+//
+//            Log.d(District.class.getName(), "yMin : " + min.getY());
+//            Log.d(District.class.getName(), "yMax : " + max.getY());
+//            Log.d(District.class.getName(), "pointY : " + point.getY());
+
             return point.getX() > min.getX() && point.getX() < max.getX() && point.getY() > min.getY() && point.getY() < max
                     .getY();
         }

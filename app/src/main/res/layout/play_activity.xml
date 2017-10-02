@@ -10,28 +10,29 @@
     <RelativeLayout
         android:id="@+id/map_layout"
         android:layout_width="match_parent"
-        android:layout_height="460dp">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/fullMap"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:adjustViewBounds="true"
             android:src="@drawable/colombo_district"/>
     </RelativeLayout>
 
 
     <HorizontalScrollView
+        android:id="@+id/availableScroll"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="0dp">
-
+        android:layout_height="match_parent"
+        android:layout_weight="8">
         <LinearLayout
             android:id="@+id/availableDistricts"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
-
         </LinearLayout>
 
     </HorizontalScrollView>
