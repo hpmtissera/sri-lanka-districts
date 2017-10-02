@@ -194,8 +194,7 @@ public class Districts {
 //            Log.d(District.class.getName(), "yMax : " + max.getY());
 //            Log.d(District.class.getName(), "pointY : " + point.getY());
 
-            return point.getX() > min.getX() && point.getX() < max.getX() && point.getY() > min.getY() && point.getY() < max
-                    .getY();
+            return point.getX() > min.getX() && point.getX() < max.getX() && point.getY() > min.getY() && point.getY() < max.getY();
         }
     }
 
