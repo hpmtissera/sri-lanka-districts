@@ -162,10 +162,6 @@ public class PlayActivity extends Activity {
 
 //            dragged.setLongClickable(false);
 
-//            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(fullMap.getLayoutParams());
-//            Log.d(PlayActivity.class.getName(), "width : " + fullMap.getWidth());
-//            Log.d(PlayActivity.class.getName(), "height : " + fullMap.getHeight());
-
         }
         return false;
     }
