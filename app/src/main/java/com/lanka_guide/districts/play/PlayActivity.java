@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.lanka_guide.districts.Districts;
 import com.lanka_guide.districts.R;
 
@@ -34,11 +36,17 @@ public class PlayActivity extends Activity {
     List<Districts.District> placedDistricts = new ArrayList<>();
     private ViewPager mViewPager;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_activity);
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
 
         fullMap = (ImageView) findViewById(R.id.fullMap);
 
@@ -63,7 +71,9 @@ public class PlayActivity extends Activity {
                     new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
+
                             Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId), Toast.LENGTH_SHORT).show();
+
                             ClipData.Item item = new ClipData.Item(Integer.toString(mapId));
 
                             ClipData dragData = new ClipData(Integer.toString(mapId), new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
@@ -129,8 +139,12 @@ public class PlayActivity extends Activity {
         int x_cord = (int) event.getX();
         int y_cord = (int) event.getY();
 
+        Log.d(PlayActivity.class.getName(), district.getName() + " district code X : " + x_cord);
+        Log.d(PlayActivity.class.getName(), district.getName() + " district code Y : " + y_cord);
+
         if (district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
-                (double) Math.round((y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0))) {
+                (double) Math.round((y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0)) || district.isInsideRage(new
+                Districts.Point(x_cord, y_cord))) {
 
             dragged.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
@@ -143,6 +157,8 @@ public class PlayActivity extends Activity {
                 params.topMargin = (int) Math.round(district.getLocation().getY() * fullMap.getHeight());
 
                 fullMapLayout.addView(dragged, params);
+
+
                 placedDistricts.add(district);
             } else {
 
@@ -157,13 +173,37 @@ public class PlayActivity extends Activity {
                         params.leftMargin * 10000.0 / fullMap.getWidth()) / 10000.0);
                 Log.d(PlayActivity.class.getName(), district.getName() + " district location Y : " + Math.round(
                         params.topMargin * 10000.0 / fullMap.getHeight()) / 10000.0);
-                Log.d(PlayActivity.class.getName(), "Fllmap aspect ratio : " + (double) fullMap.getWidth() / fullMap.getHeight());
+                Log.d(PlayActivity.class.getName(), "Fullmap aspect ratio : " + (double) fullMap.getWidth() / fullMap.getHeight());
             }
 
-//            dragged.setLongClickable(false);
+            dragged.setLongClickable(false);
 
         }
         return false;
+    }
+
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 
     private static class MyDragShadowBuilder extends View.DragShadowBuilder {

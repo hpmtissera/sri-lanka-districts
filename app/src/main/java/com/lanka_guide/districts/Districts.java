@@ -1,5 +1,7 @@
 package com.lanka_guide.districts;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,8 +19,9 @@ public class Districts {
     private static Map<Integer, District> mapIdDistrictMap = new HashMap<>();
 
     static {
-        districts.add(new District(R.drawable.ampara_district, R.drawable.ampara_district_crop, "Ampara", 0.5625, 0.5222));
-        districts.add(new District(R.drawable.anuradhapura_district, R.drawable.anuradhapura_district_crop, "Anuradhapura", 0.2738, 0.2618));
+        districts.add(new District(R.drawable.ampara_district, R.drawable.ampara_district_crop, "Ampara (අම්පාර)", 0.5625, 0.5222));
+        districts.add(new District(R.drawable.anuradhapura_district, R.drawable.anuradhapura_district_crop, "Anuradhapura", 0.2, 0.2738, 0.2618, 442,
+                520));
         districts.add(new District(R.drawable.badulla_district, R.drawable.badulla_district_crop, "Badulla", 0.5025, 0.5498));
         districts.add(new District(R.drawable.batticaloa_district, R.drawable.batticalo_district_crop, "Batticaloa", 0.6175, 0.4155));
         districts.add(new District(R.drawable.colombo_district, R.drawable.colombo_district_crop, "Colombo", 0.2425, 0.6855));
@@ -38,7 +41,7 @@ public class Districts {
         districts.add(new District(R.drawable.mullaitivu_district, R.drawable.mullaitivu_district_crop, "Mullaitivu", 0.34, 0.144));
         districts.add(new District(R.drawable.nuwara_eliya_district, R.drawable.nuwara_eliya_district_crop, "Nuwara Eliya", 0.4094, 0.6203));
         districts.add(new District(R.drawable.polonnaruwa_district, R.drawable.polonnaruwa_district_crop, "Polonnaruwa", 0.4994, 0.3932));
-        districts.add(new District(R.drawable.puttalam_district, R.drawable.puttalam_district_crop, "Puttalam", 0.1981, 0.344));
+        districts.add(new District(R.drawable.puttalam_district, R.drawable.puttalam_district_crop, "Puttalam", 0.2, 0.1981, 0.344, 277, 658));
         districts.add(new District(R.drawable.ratnapura_district, R.drawable.ratnapura_district_crop, "Ratnapura", 0.3388, 0.699));
         districts.add(new District(R.drawable.trincomalee_district, R.drawable.trincomalee_district_crop, "Trincomalee", 0.5063, 0.2512));
         districts.add(new District(R.drawable.vavuniya_district, R.drawable.vavuniya_district_crop, "Vavuniya", 0.3369, 0.2159));
@@ -126,6 +129,17 @@ public class Districts {
             this.range = new Range(location);
         }
 
+        District(int fullMapId, int districtMapId, String name, double precentage, Point location, Point dropPoint) {
+            this(fullMapId, districtMapId, name);
+            this.location = location;
+            this.range = new Range(dropPoint, precentage);
+        }
+
+        public District(int fullMapId, int districtMapId, String name, double precentage, double locationX, double locationY, int dropPointX, int
+                dropPointY) {
+            this(fullMapId, districtMapId, name, precentage, new Point(locationX, locationY), new Point(dropPointX, dropPointY));
+        }
+
         public String getName() {
             return name;
         }
@@ -170,29 +184,32 @@ public class Districts {
     }
 
     public static class Range {
+        static final double DEFAULT_PERCENTAGE = 0.15;
         Point min;
         Point max;
-        double percentage = 0.15;
 
-        public Range(Point location) {
-            double xMin = location.getX() * (1 - percentage);
-            double xMax = location.getX() * (1 + percentage);
-            double yMin = location.getY() * (1 - percentage);
-            double yMax = location.getY() * (1 + percentage);
+        public Range(Point dropPoint) {
+            this(dropPoint, DEFAULT_PERCENTAGE);
+        }
+
+        public Range(Point dropPoint, double precentage) {
+            double xMin = dropPoint.getX() * (1 - precentage);
+            double xMax = dropPoint.getX() * (1 + precentage);
+            double yMin = dropPoint.getY() * (1 - precentage);
+            double yMax = dropPoint.getY() * (1 + precentage);
 
             this.min = new Point(xMin, yMin);
             this.max = new Point(xMax, yMax);
-
         }
 
         public boolean isInsideRage(Point point) {
-//            Log.d(District.class.getName(), "xMin : " + min.getX());
-//            Log.d(District.class.getName(), "xMax : " + max.getX());
-//            Log.d(District.class.getName(), "pointX : " + point.getX());
-//
-//            Log.d(District.class.getName(), "yMin : " + min.getY());
-//            Log.d(District.class.getName(), "yMax : " + max.getY());
-//            Log.d(District.class.getName(), "pointY : " + point.getY());
+            Log.d(District.class.getName(), "xMin : " + min.getX());
+            Log.d(District.class.getName(), "xMax : " + max.getX());
+            Log.d(District.class.getName(), "pointX : " + point.getX());
+
+            Log.d(District.class.getName(), "yMin : " + min.getY());
+            Log.d(District.class.getName(), "yMax : " + max.getY());
+            Log.d(District.class.getName(), "pointY : " + point.getY());
 
             return point.getX() > min.getX() && point.getX() < max.getX() && point.getY() > min.getY() && point.getY() < max.getY();
         }
