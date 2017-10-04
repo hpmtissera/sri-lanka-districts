@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
@@ -43,9 +44,8 @@ public class PlayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play_activity);
 
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-                .build();
+        mAdView = (AdView) findViewById(R.id.playAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
         fullMap = (ImageView) findViewById(R.id.fullMap);
@@ -160,6 +160,12 @@ public class PlayActivity extends Activity {
 
 
                 placedDistricts.add(district);
+
+                if (placedDistricts.size() == 25) {
+                    TextView congratzText = (TextView) findViewById(R.id.playCongratz);
+                    congratzText.setVisibility(View.VISIBLE);
+                    congratzText.bringToFront();
+                }
             } else {
 
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(dragged.getLayoutParams());

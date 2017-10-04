@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:ads="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
@@ -7,17 +8,51 @@
               android:padding="16dp"
               tools:context="com.lanka_guide.districts.quiz.QuizActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPageAndroid"
-        android:layout_width="match_parent"
-        android:layout_height="390dp"/>
+    <RelativeLayout
+        android:id="@+id/map_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="6">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPageAndroid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/quizCongratz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#07000000"
+            android:gravity="center"
+            android:text="@string/congratz"
+            android:textColor="#ff0022"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/quizSlideForNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="@string/slideForNext"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
-                android:columnCount="2"
-                android:orientation="horizontal">
+                android:layout_weight="2"
+                android:columnCount="2">
 
         <Button xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/option1"
@@ -44,4 +79,12 @@
                 android:onClick="clickAnswer"/>
     </GridLayout>
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/quizAdView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_home_footer">
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>

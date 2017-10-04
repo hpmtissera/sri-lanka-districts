@@ -57,7 +57,6 @@ public class Districts {
 
     public static int[] getDistrictImagesId() {
         Collections.shuffle(districts);
-        districts = Collections.unmodifiableList(districts);
         int[] imageIds = new int[districts.size()];
         for (int i = 0; i < districts.size(); i++) {
             imageIds[i] = districts.get(i).getFullMapId();

@@ -35,4 +35,6 @@
     <string name="quiz">Quiz</string>
     <string name="play">Play</string>
     <string name="banner_home_footer">ca-app-pub-4998476997909861/4622939511</string>
+    <string name="congratz">Congratulations!!!</string>
+    <string name="slideForNext">Slide for next question.</string>
 </resources>
