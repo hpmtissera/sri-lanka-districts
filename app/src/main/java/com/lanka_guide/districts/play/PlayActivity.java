@@ -42,6 +42,11 @@ public class PlayActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(Districts.getDistricts().isEmpty()) {
+            new Districts(getApplicationContext());
+        }
+
         setContentView(R.layout.play_activity);
 
         mAdView = (AdView) findViewById(R.id.playAdView);

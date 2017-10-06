@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Sri Lanka Districts</string>
+
+    <string name="country_prompt">Select the District Name</string>
+
+    <string name="ampara">අම්පාර</string>
+    <string name="anuradhapura">අනුරාධපුර</string>
+    <string name="badulla">බදුල්ල</string>
+    <string name="batticaloa">මඩකලපුව</string>
+    <string name="colombo">කොළඹ</string>
+    <string name="galle">ගාල්ල</string>
+    <string name="gampaha">ගම්පහ</string>
+    <string name="hambantota">හම්බන්තොට</string>
+    <string name="jaffna">යාපනය</string>
+    <string name="kalutara">කළුතර</string>
+    <string name="kandy">මහනුවර</string>
+    <string name="kegalle">කෑගල්ල</string>
+    <string name="kilinochchi">කිලිනොච්චි</string>
+    <string name="kurunegala">කුරුණෑගල</string>
+    <string name="mannar">මන්නාරම</string>
+    <string name="matale">මාතලේ</string>
+    <string name="matara">මාතර</string>
+    <string name="monaragala">මොණරාගල</string>
+    <string name="mullaitivu">මුලතිව්</string>
+    <string name="nuwaraEliya">නුවරඑළිය</string>
+    <string name="polonnaruwa">පොළොන්නරුව</string>
+    <string name="puttalam">පුත්තලම</string>
+    <string name="ratnapura">රත්නපුර</string>
+    <string name="trincomalee">ත්‍රිකුණාමලය</string>
+    <string name="vavuniya">වවුනියාව</string>
+
+    <string name="select_language">Select a language</string>
+
+    <string-array name="languages">
+        <item>Select a language</item>
+        <item>English</item>
+        <item>සිංහල</item>
+    </string-array>
+
+    <string name="quiz">කුයිස්</string>
+    <string name="play">Play</string>
+    <string name="banner_home_footer">ca-app-pub-4998476997909861/4622939511</string>
+    <string name="congratz">සුබපැතුම්!!!</string>
+    <string name="slideForNext">⬅ ඊළඟ ප්‍රශ්නය සඳහා slide කරන්න.</string>
+</resources>

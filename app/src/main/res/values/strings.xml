@@ -3,33 +3,38 @@
 
     <string name="country_prompt">Select the District Name</string>
 
-    <string-array name="country_arrays">
-        <item>Select District Name</item>
-        <item>Ampara</item>
-        <item>Anuradhapura</item>
-        <item>Badulla</item>
-        <item>Batticaloa</item>
-        <item>Colombo</item>
-        <item>Galle</item>
-        <item>Gampaha</item>
-        <item>Hambantota</item>
-        <item>Jaffna</item>
-        <item>Kalutara</item>
-        <item>Kandy</item>
-        <item>Kegalle</item>
-        <item>Kilinochchi</item>
-        <item>Kurunegala</item>
-        <item>Mannar</item>
-        <item>Matale</item>
-        <item>Matara</item>
-        <item>Monaragala</item>
-        <item>Mullaitivu</item>
-        <item>Nuwara Eliya</item>
-        <item>Polonnaruwa</item>
-        <item>Puttalam</item>
-        <item>Ratnapura</item>
-        <item>Trincomalee</item>
-        <item>Vavuniya</item>
+    <string name="ampara">Ampara</string>
+    <string name="anuradhapura">Anuradhapura</string>
+    <string name="badulla">Badulla</string>
+    <string name="batticaloa">Batticaloa</string>
+    <string name="colombo">Colombo</string>
+    <string name="galle">Galle</string>
+    <string name="gampaha">Gampaha</string>
+    <string name="hambantota">Hambantota</string>
+    <string name="jaffna">Jaffna</string>
+    <string name="kalutara">Kalutara</string>
+    <string name="kandy">Kandy</string>
+    <string name="kegalle">Kegalle</string>
+    <string name="kilinochchi">Kilinochchi</string>
+    <string name="kurunegala">Kurunegala</string>
+    <string name="mannar">Mannar</string>
+    <string name="matale">Matale</string>
+    <string name="matara">Matara</string>
+    <string name="monaragala">Monaragala</string>
+    <string name="mullaitivu">Mullaitivu</string>
+    <string name="nuwaraEliya">Nuwara Eliya</string>
+    <string name="polonnaruwa">Polonnaruwa</string>
+    <string name="puttalam">Puttalam</string>
+    <string name="ratnapura">Ratnapura</string>
+    <string name="trincomalee">Trincomalee</string>
+    <string name="vavuniya">Vavuniya</string>
+
+    <string name="select_language">Select a language</string>
+
+    <string-array name="languages">
+        <item>Select a language</item>
+        <item>English</item>
+        <item>සිංහල</item>
     </string-array>
 
     <string name="quiz">Quiz</string>

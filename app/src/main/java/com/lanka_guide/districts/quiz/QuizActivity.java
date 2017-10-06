@@ -33,6 +33,11 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(Districts.getDistricts().isEmpty()) {
+            new Districts(getApplicationContext());
+        }
+        
         setContentView(R.layout.quiz_activity);
 
         mAdView = (AdView) findViewById(R.id.quizAdView);

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:adjustViewBounds="true"
-            android:src="@drawable/colombo_district"/>
+            android:src="@drawable/map_srilanka"/>
 
         <TextView
             android:id="@+id/playCongratz"
