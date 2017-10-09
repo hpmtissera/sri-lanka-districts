@@ -32,12 +32,16 @@ public class Preferences {
         editor.commit();
     }
 
+    public Locale getLocale() {
+        String locale = preferences.getString(KEY_LOCALE, null);
+        if (locale != null) {
+            return new Locale(locale);
+        }
+        return null;
+    }
+
     public void setLocale(Locale locale) {
         editor.putString(KEY_LOCALE, locale.getLanguage());
         editor.commit();
-    }
-
-    public Locale getLocale() {
-        return new Locale(preferences.getString(KEY_LOCALE, null));
     }
 }

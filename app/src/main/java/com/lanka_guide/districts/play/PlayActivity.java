@@ -8,15 +8,16 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -38,6 +39,7 @@ public class PlayActivity extends Activity {
     private ViewPager mViewPager;
     private android.widget.RelativeLayout.LayoutParams layoutParams;
     private AdView mAdView;
+    private TextView districtLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class PlayActivity extends Activity {
         }
 
         setContentView(R.layout.play_activity);
+
+        districtLabel = (TextView) findViewById(R.id.playLabel);
 
         mAdView = (AdView) findViewById(R.id.playAdView);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -77,13 +81,13 @@ public class PlayActivity extends Activity {
                         @Override
                         public boolean onLongClick(View v) {
 
-                            Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId), Toast.LENGTH_SHORT).show();
 
                             ClipData.Item item = new ClipData.Item(Integer.toString(mapId));
 
                             ClipData dragData = new ClipData(Integer.toString(mapId), new String[]{ClipDescription.MIMETYPE_TEXT_PLAIN}, item);
 
-                            Bitmap fullMap = BitmapFactory.decodeResource(getResources(), R.drawable.colombo_district);
+                            Bitmap fullMap = BitmapFactory.decodeResource(getResources(), R.drawable.map_srilanka);
                             Bitmap bMap = BitmapFactory.decodeResource(getResources(), mapId);
 
                             int scaledWidth = (int) (((double) bMap.getWidth() / fullMap.getWidth()) * PlayActivity.this.fullMap.getWidth());
@@ -102,6 +106,25 @@ public class PlayActivity extends Activity {
 
             );
 
+            districtImage.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    districtLabel.setText(Districts.getNameByDistrictMapId(mapId));
+                    districtLabel.setVisibility(View.VISIBLE);
+
+                    new CountDownTimer(2000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            districtLabel.setVisibility(View.GONE);
+                        }
+                    }.start();
+
+                    return false;
+                }
+            });
             districtImage.setAdjustViewBounds(true);
             availableDistricts.addView(districtImage);
 
@@ -147,7 +170,7 @@ public class PlayActivity extends Activity {
         Log.d(PlayActivity.class.getName(), district.getName() + " district code X : " + x_cord);
         Log.d(PlayActivity.class.getName(), district.getName() + " district code Y : " + y_cord);
 
-        if (district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
+        if (true || district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
                 (double) Math.round((y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0)) || district.isInsideRage(new
                 Districts.Point(x_cord, y_cord))) {
 
@@ -187,7 +210,7 @@ public class PlayActivity extends Activity {
                 Log.d(PlayActivity.class.getName(), "Fullmap aspect ratio : " + (double) fullMap.getWidth() / fullMap.getHeight());
             }
 
-            dragged.setLongClickable(false);
+//            dragged.setLongClickable(false);
 
         }
         return false;

@@ -28,7 +28,7 @@ public class Districts {
         districts.add(new District(R.drawable.anuradhapura_district, R.drawable.anuradhapura_district_crop, getString(R.string.anuradhapura), 0.2, 0.2738,
                 0.2618, 442, 520));
         districts.add(new District(R.drawable.badulla_district, R.drawable.badulla_district_crop, getString(R.string.badulla), 0.5025, 0.5498));
-        districts.add(new District(R.drawable.batticaloa_district, R.drawable.batticalo_district_crop, getString(R.string.batticaloa), 0.6175, 0.4155));
+        districts.add(new District(R.drawable.batticaloa_district, R.drawable.batticalo_district_crop, getString(R.string.batticaloa), 0.6315, 0.4098));
         districts.add(new District(R.drawable.colombo_district, R.drawable.colombo_district_crop, getString(R.string.colombo), 0.2425, 0.6855));
         districts.add(new District(R.drawable.galle_district, R.drawable.galle_district_crop, getString(R.string.galle), 0.2831, 0.8106));
         districts.add(new District(R.drawable.gampaha_district, R.drawable.gampaha_district_crop, getString(R.string.gampaha), 0.2375, 0.6126));
@@ -59,11 +59,6 @@ public class Districts {
                 mapIdDistrictMap.put(d.getDistrictMapId(), d);
             }
         }
-    }
-
-    private String getString(int id) {
-        Resources resources = context.getResources();
-        return resources.getString(id);
     }
 
     public static int[] getDistrictImagesId() {
@@ -109,6 +104,10 @@ public class Districts {
         return answers;
     }
 
+    private String getString(int id) {
+        Resources resources = context.getResources();
+        return resources.getString(id);
+    }
 
     public static class District {
         int fullMapId;
