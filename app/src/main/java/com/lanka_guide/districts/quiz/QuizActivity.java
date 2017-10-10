@@ -1,4 +1,4 @@
-package com.lanka_guide.districtssimple;
+package com.lanka_guide.districts.quiz;
 
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -8,10 +8,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.lanka_guide.districts.Districts;
+import com.lanka_guide.districts.R;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class DistrictSlider extends AppCompatActivity {
+public class QuizActivity extends AppCompatActivity {
 
     private Button option1;
     private Button option2;
@@ -19,17 +27,29 @@ public class DistrictSlider extends AppCompatActivity {
     private Button option4;
     private ColorFilter defaultButtonBackground;
     private ViewPager mViewPager;
+    private Set<String> correctAnswers = new HashSet<>();
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.android_image_slider_activity);
+
+        if(Districts.getDistricts().isEmpty()) {
+            new Districts(getApplicationContext());
+        }
+        
+        setContentView(R.layout.quiz_activity);
+
+        mAdView = (AdView) findViewById(R.id.quizAdView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);
-        DistrictSliderAdapter adapterView = new DistrictSliderAdapter(this);
+        QuizMapsSliderAdapter adapterView = new QuizMapsSliderAdapter(this);
         mViewPager.setAdapter(adapterView);
         mViewPager.addOnPageChangeListener(new CustomOnPageChangeListener());
 
+        correctAnswers.clear();
         setAnswers();
         defaultButtonBackground = option1.getBackground().getColorFilter();
     }
@@ -49,6 +69,7 @@ public class DistrictSlider extends AppCompatActivity {
 
         option4 = (Button) findViewById(R.id.option4);
         option4.setText(answers.get(3));
+
     }
 
     public void clickAnswer(View view) {
@@ -77,6 +98,7 @@ public class DistrictSlider extends AppCompatActivity {
             selectedButton.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
             disableAllButtons();
             selectedButton.setEnabled(true);
+            correctAnswers.add(correctAnswer);
         } else {
             selectedButton.getBackground().setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
             disableAllButtons();
@@ -101,6 +123,16 @@ public class DistrictSlider extends AppCompatActivity {
 
         }
         selectedButton.invalidate();
+
+        if (correctAnswers.size() == 25) {
+            TextView congratzText = (TextView) findViewById(R.id.quizCongratz);
+            congratzText.setVisibility(View.VISIBLE);
+            congratzText.bringToFront();
+        } else {
+            TextView slideForNextText = (TextView) findViewById(R.id.quizSlideForNext);
+            slideForNextText.setVisibility(View.VISIBLE);
+            slideForNextText.bringToFront();
+        }
     }
 
     private void disableAllButtons() {
@@ -125,6 +157,10 @@ public class DistrictSlider extends AppCompatActivity {
         option2.invalidate();
         option3.invalidate();
         option4.invalidate();
+
+        TextView slideForNextText = (TextView) findViewById(R.id.quizSlideForNext);
+        slideForNextText.setVisibility(View.GONE);
+        slideForNextText.bringToFront();
     }
 
     private class CustomOnPageChangeListener implements ViewPager.OnPageChangeListener {
