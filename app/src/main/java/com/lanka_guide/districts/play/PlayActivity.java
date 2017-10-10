@@ -170,7 +170,7 @@ public class PlayActivity extends Activity {
         Log.d(PlayActivity.class.getName(), district.getName() + " district code X : " + x_cord);
         Log.d(PlayActivity.class.getName(), district.getName() + " district code Y : " + y_cord);
 
-        if (true || district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
+        if (district.isInsideRage(new Districts.Point(Math.round((x_cord - dragged.getWidth() / 2) * 10000.0) / fullMap.getWidth() / 10000.0,
                 (double) Math.round((y_cord - dragged.getHeight() / 2) * 10000.0) / fullMap.getHeight() / 10000.0)) || district.isInsideRage(new
                 Districts.Point(x_cord, y_cord))) {
 
@@ -210,8 +210,8 @@ public class PlayActivity extends Activity {
                 Log.d(PlayActivity.class.getName(), "Fullmap aspect ratio : " + (double) fullMap.getWidth() / fullMap.getHeight());
             }
 
-//            dragged.setLongClickable(false);
-
+            dragged.setLongClickable(false);
+            dragged.setOnTouchListener(null);
         }
         return false;
     }
