@@ -26,10 +26,8 @@ import com.lanka_guide.districts.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by chanya on 2017/09/27.
- */
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class PlayActivity extends Activity {
     ImageView fullMap;
@@ -40,6 +38,7 @@ public class PlayActivity extends Activity {
     private android.widget.RelativeLayout.LayoutParams layoutParams;
     private AdView mAdView;
     private TextView districtLabel;
+    private long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +79,6 @@ public class PlayActivity extends Activity {
                     new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View v) {
-
-//                            Toast.makeText(PlayActivity.this, Districts.getNameByDistrictMapId(mapId), Toast.LENGTH_SHORT).show();
 
                             ClipData.Item item = new ClipData.Item(Integer.toString(mapId));
 
@@ -156,6 +153,8 @@ public class PlayActivity extends Activity {
                 return true;
             }
         });
+
+        startTime = System.currentTimeMillis();
     }
 
     private boolean onDropDistrict(DragEvent event) {
@@ -193,6 +192,19 @@ public class PlayActivity extends Activity {
                     TextView congratzText = (TextView) findViewById(R.id.playCongratz);
                     congratzText.setVisibility(View.VISIBLE);
                     congratzText.bringToFront();
+
+                    TextView timeSpentText = (TextView) findViewById(R.id.playTime);
+                    timeSpentText.setVisibility(View.VISIBLE);
+                    timeSpentText.bringToFront();
+
+                    long timeSpent = System.currentTimeMillis() - startTime;
+                    String timeSpentStr = String.format(Locale.ENGLISH, "%02d:%02d",
+                            TimeUnit.MILLISECONDS.toMinutes(timeSpent),
+                            TimeUnit.MILLISECONDS.toSeconds(timeSpent) -
+                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeSpent))
+                    );
+                    timeSpentText.setText(timeSpentStr);
+
                 }
             } else {
 

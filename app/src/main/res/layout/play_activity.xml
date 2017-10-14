@@ -27,11 +27,25 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:background="#07000000"
+            android:background="@null"
             android:gravity="center"
             android:text="@string/congratz"
             android:textColor="#ff0022"
             android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/playTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/playCongratz"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:visibility="gone"/>
 

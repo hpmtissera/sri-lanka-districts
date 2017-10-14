@@ -34,6 +34,20 @@
             android:visibility="gone"/>
 
         <TextView
+            android:id="@+id/quizTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/quizCongratz"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:visibility="gone"/>
+
+        <TextView
             android:id="@+id/quizSlideForNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

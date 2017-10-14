@@ -17,7 +17,9 @@ import com.lanka_guide.districts.R;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -29,6 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private Set<String> correctAnswers = new HashSet<>();
     private AdView mAdView;
+    private long startTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class QuizActivity extends AppCompatActivity {
         correctAnswers.clear();
         setAnswers();
         defaultButtonBackground = option1.getBackground().getColorFilter();
+
+        startTime = System.currentTimeMillis();
+
     }
 
     private void setAnswers() {
@@ -128,6 +134,18 @@ public class QuizActivity extends AppCompatActivity {
             TextView congratzText = (TextView) findViewById(R.id.quizCongratz);
             congratzText.setVisibility(View.VISIBLE);
             congratzText.bringToFront();
+
+            TextView timeSpentText = (TextView) findViewById(R.id.quizTime);
+            timeSpentText.setVisibility(View.VISIBLE);
+            timeSpentText.bringToFront();
+
+            long timeSpent = System.currentTimeMillis() - startTime;
+            String timeSpentStr = String.format(Locale.ENGLISH, "%02d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(timeSpent),
+                    TimeUnit.MILLISECONDS.toSeconds(timeSpent) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeSpent))
+            );
+            timeSpentText.setText(timeSpentStr);
         } else {
             TextView slideForNextText = (TextView) findViewById(R.id.quizSlideForNext);
             slideForNextText.setVisibility(View.VISIBLE);
