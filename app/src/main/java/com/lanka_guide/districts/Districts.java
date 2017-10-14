@@ -34,21 +34,22 @@ public class Districts {
         districts.add(new District(R.drawable.gampaha_district, R.drawable.gampaha_district_crop, getString(R.string.gampaha), 0.2375, 0.6126));
         districts.add(new District(R.drawable.hambantota_district, R.drawable.hambantota_district_crop, getString(R.string.hambantota), 0.4613, 0.7783));
         districts.add(new District(R.drawable.jaffna_district, R.drawable.jaffna_district_crop, getString(R.string.jaffna), 0.1869, 0.0628));
-        districts.add(new District(R.drawable.kalutara_district, R.drawable.kalutara_district_crop, getString(R.string.kalutara), 0.2563, 0.7203));
+        districts.add(new District(R.drawable.kalutara_district, R.drawable.kalutara_district_crop, getString(R.string.kalutara), 0.2563, 0.7230));
         districts.add(new District(R.drawable.kandy_district, R.drawable.kandy_district_crop, getString(R.string.kandy), 0.4075, 0.5783));
         districts.add(new District(R.drawable.kegalle_district, R.drawable.kegalle_district_crop, getString(R.string.kegalle), 0.3288, 0.5961));
         districts.add(new District(R.drawable.kilinochchi_district, R.drawable.kilinochchi_district_crop, getString(R.string.kilinochchi), 0.2913, 0.099));
-        districts.add(new District(R.drawable.kurunegala_district, R.drawable.kurunegala_district_crop, getString(R.string.kurunegala), 0.2569, 0.4242));
+        districts.add(new District(R.drawable.kurunegala_district, R.drawable.kurunegala_district_crop, getString(R.string.kurunegala), 0.2, 0.2569,
+                0.4242, 371, 713));
         districts.add(new District(R.drawable.mannar_district, R.drawable.mannar_district_crop, getString(R.string.mannar), 0.1988, 0.1957));
         districts.add(new District(R.drawable.matale_district, R.drawable.matale_district_crop, getString(R.string.matale), 0.4256, 0.4662));
         districts.add(new District(R.drawable.matara_district, R.drawable.matara_district_crop, getString(R.string.matara), 0.395, 0.815));
         districts.add(new District(R.drawable.moneragala_district, R.drawable.moneragala_district_crop, getString(R.string.monaragala), 0.5185, 0.5848));
         districts.add(new District(R.drawable.mullaitivu_district, R.drawable.mullaitivu_district_crop, getString(R.string.mullaitivu), 0.34, 0.144));
-        districts.add(new District(R.drawable.nuwara_eliya_district, R.drawable.nuwara_eliya_district_crop, getString(R.string.nuwaraEliya), 0.4094, 0.6203));
+        districts.add(new District(R.drawable.nuwara_eliya_district, R.drawable.nuwara_eliya_district_crop, getString(R.string.nuwaraEliya), 0.4094, 0.6212));
         districts.add(new District(R.drawable.polonnaruwa_district, R.drawable.polonnaruwa_district_crop, getString(R.string.polonnaruwa), 0.4994, 0.3932));
         districts.add(new District(R.drawable.puttalam_district, R.drawable.puttalam_district_crop, getString(R.string.puttalam), 0.2, 0.1981, 0.344, 277,
                 658));
-        districts.add(new District(R.drawable.ratnapura_district, R.drawable.ratnapura_district_crop, getString(R.string.ratnapura), 0.3388, 0.699));
+        districts.add(new District(R.drawable.ratnapura_district, R.drawable.ratnapura_district_crop, getString(R.string.ratnapura), 0.3388, 0.7010));
         districts.add(new District(R.drawable.trincomalee_district, R.drawable.trincomalee_district_crop, getString(R.string.trincomalee), 0.5063, 0.2512));
         districts.add(new District(R.drawable.vavuniya_district, R.drawable.vavuniya_district_crop, getString(R.string.vavuniya), 0.3369, 0.2159));
 
