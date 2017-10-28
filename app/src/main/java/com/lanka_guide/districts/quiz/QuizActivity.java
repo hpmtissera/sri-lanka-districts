@@ -1,5 +1,7 @@
 package com.lanka_guide.districts.quiz;
 
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
@@ -30,17 +32,23 @@ public class QuizActivity extends AppCompatActivity {
     private ColorFilter defaultButtonBackground;
     private ViewPager mViewPager;
     private Set<String> correctAnswers = new HashSet<>();
+    private Set<String> showedDistricts = new HashSet<>();
     private AdView mAdView;
     private long startTime;
+    private Locale locale;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(Districts.getDistricts().isEmpty()) {
-            new Districts(getApplicationContext());
-        }
-        
+        new Districts(getApplicationContext());
+
+
+        Resources resources = getResources();
+        Configuration configuration = resources.getConfiguration();
+        locale = configuration.locale;
+        getApplicationContext().createConfigurationContext(configuration);
+
         setContentView(R.layout.quiz_activity);
 
         mAdView = (AdView) findViewById(R.id.quizAdView);
@@ -76,6 +84,7 @@ public class QuizActivity extends AppCompatActivity {
         option4 = (Button) findViewById(R.id.option4);
         option4.setText(answers.get(3));
 
+        showedDistricts.add(districtName);
     }
 
     public void clickAnswer(View view) {
@@ -131,26 +140,50 @@ public class QuizActivity extends AppCompatActivity {
         selectedButton.invalidate();
 
         if (correctAnswers.size() == 25) {
-            TextView congratzText = (TextView) findViewById(R.id.quizCongratz);
-            congratzText.setVisibility(View.VISIBLE);
-            congratzText.bringToFront();
+            TextView resultText = (TextView) findViewById(R.id.quizResult);
+            resultText.setVisibility(View.VISIBLE);
+            resultText.bringToFront();
 
-            TextView timeSpentText = (TextView) findViewById(R.id.quizTime);
-            timeSpentText.setVisibility(View.VISIBLE);
-            timeSpentText.bringToFront();
+            showTimeSpent();
+        } else if (showedDistricts.size() == 25) {
+            Configuration config = new Configuration();
+            config.setLocale(locale);
 
-            long timeSpent = System.currentTimeMillis() - startTime;
-            String timeSpentStr = String.format(Locale.ENGLISH, "%02d:%02d",
-                    TimeUnit.MILLISECONDS.toMinutes(timeSpent),
-                    TimeUnit.MILLISECONDS.toSeconds(timeSpent) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeSpent))
-            );
-            timeSpentText.setText(timeSpentStr);
+            getBaseContext().getResources().updateConfiguration(config,
+                    getBaseContext().getResources().getDisplayMetrics());
+
+            TextView resultText = (TextView) findViewById(R.id.quizResult);
+            resultText.setVisibility(View.VISIBLE);
+            resultText.bringToFront();
+
+            resultText.setText(String.format(getString(R.string.quizNumOfCorrectAns), correctAnswers.size()));
+            resultText.setTextColor(Color.BLACK);
+            resultText.setTextSize(15);
+
+            showTimeSpent();
         } else {
             TextView slideForNextText = (TextView) findViewById(R.id.quizSlideForNext);
             slideForNextText.setVisibility(View.VISIBLE);
             slideForNextText.bringToFront();
         }
+    }
+
+    private void showTimeSpent() {
+        TextView timeSpentText = (TextView) findViewById(R.id.quizTime);
+        timeSpentText.setVisibility(View.VISIBLE);
+        timeSpentText.bringToFront();
+
+        long timeSpent = System.currentTimeMillis() - startTime;
+        String timeSpentStr = getTimeSpenStr(timeSpent);
+        timeSpentText.setText(timeSpentStr);
+    }
+
+    private String getTimeSpenStr(long timeSpent) {
+        return String.format(Locale.ENGLISH, "%02d:%02d",
+                TimeUnit.MILLISECONDS.toMinutes(timeSpent),
+                TimeUnit.MILLISECONDS.toSeconds(timeSpent) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeSpent))
+        );
     }
 
     private void disableAllButtons() {

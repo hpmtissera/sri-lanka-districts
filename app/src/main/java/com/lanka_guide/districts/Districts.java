@@ -24,6 +24,9 @@ public class Districts {
 
     public Districts(Context context) {
         this.context = context;
+        districts.clear();
+        districtNames.clear();
+        mapIdDistrictMap.clear();
         districts.add(new District(R.drawable.ampara_district, R.drawable.ampara_district_crop, getString(R.string.ampara) , 0.5625, 0.5222));
         districts.add(new District(R.drawable.anuradhapura_district, R.drawable.anuradhapura_district_crop, getString(R.string.anuradhapura), 0.2, 0.2738,
                 0.2618, 442, 520));

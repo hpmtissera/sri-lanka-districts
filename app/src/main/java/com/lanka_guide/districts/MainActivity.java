@@ -68,12 +68,10 @@ public class MainActivity extends Activity {
     public void setLocale(Locale locale) {
         Configuration config = new Configuration();
         config.setLocale(locale);
-//        this.getApplicationContext().createConfigurationContext(config);
 
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
 
-//        setContentView(R.layout.main_activity);
     }
     public void onClickQuiz(View view) {
         Intent intent = new Intent(this, QuizActivity.class);

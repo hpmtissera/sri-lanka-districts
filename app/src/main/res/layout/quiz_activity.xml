@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/quizCongratz"
+            android:id="@+id/quizResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -37,7 +37,7 @@
             android:id="@+id/quizTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/quizCongratz"
+            android:layout_below="@+id/quizResult"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:background="@null"
@@ -99,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="clickAnswer"/>
     </GridLayout>
+    </RelativeLayout>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/quizAdView"
@@ -108,6 +109,5 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_home_footer">
     </com.google.android.gms.ads.AdView>
-    </RelativeLayout>
 
 </LinearLayout>

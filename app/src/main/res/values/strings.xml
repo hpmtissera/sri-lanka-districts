@@ -42,4 +42,5 @@
     <string name="banner_home_footer">ca-app-pub-4998476997909861/4622939511</string>
     <string name="congratz">Congratulations!!!</string>
     <string name="slideForNext">Slide for next question.</string>
+    <string name="quizNumOfCorrectAns">You answered %d out of 25 correctly.</string>
 </resources>
