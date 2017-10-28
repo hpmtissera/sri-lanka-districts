@@ -37,9 +37,10 @@
         <item>සිංහල</item>
     </string-array>
 
-    <string name="quiz">කුයිස්</string>
+    <string name="quiz">Quiz</string>
     <string name="play">Play</string>
     <string name="banner_home_footer">ca-app-pub-4998476997909861/4622939511</string>
     <string name="congratz">සුබපැතුම්!!!</string>
     <string name="slideForNext">⬅ ඊළඟ ප්‍රශ්නය සඳහා slide කරන්න.</string>
+    <string name="quizNumOfCorrectAns">නිවැරදි පිළිතුරු ගණන %d.</string>
 </resources>

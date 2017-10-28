@@ -44,9 +44,7 @@ public class PlayActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(Districts.getDistricts().isEmpty()) {
-            new Districts(getApplicationContext());
-        }
+        new Districts(getApplicationContext());
 
         setContentView(R.layout.play_activity);
 
